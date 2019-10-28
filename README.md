@@ -1,6 +1,12 @@
+This is a modified edition of [video-caption.pytorch](https://github.com/xiadingZ/video-caption.pytorch), which is developed for a project of SEU *Student Research Training Program*.
+
 # pytorch implementation of video captioning
 
-recommend installing pytorch and python packages using Anaconda
+recommend installing dependencies with the code below:
+```Shell
+pip3 install -r requirement.txt
+```
+~~recommend installing pytorch and python packages using Anaconda~~
 
 ## requirements
 
