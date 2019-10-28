@@ -1,0 +1,3 @@
+nohup: ignoring input
+/seu_share/home/csqjxiao/anaconda3/envs/hox-video-caption/lib/python2.7/site-packages/torch/nn/modules/rnn.py:38: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.5 and num_layers=1
+  "num_layers={}".format(dropout, num_layers))
