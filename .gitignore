@@ -1,8 +1,8 @@
 feats/
-save*/
-results/
+#save*/
+#results/
 *video*
-*.json
+#*.json
 *.ipynb
 data/
 .idea/
