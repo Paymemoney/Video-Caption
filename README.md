@@ -4,7 +4,7 @@ This is a modified edition of [video-caption.pytorch](https://github.com/xiading
 
 recommend installing dependencies with the code below:
 ```Shell
-pip3 install -r requirement.txt
+pip3 install -r requirements.txt
 ```
 ~~recommend installing pytorch and python packages using Anaconda~~
 
