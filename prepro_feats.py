@@ -49,7 +49,8 @@ def extract_feats(params, model, load_image_fn):
     if not os.path.isdir(dir_fc):
         os.mkdir(dir_fc)
     print("save video feats to %s" % (dir_fc))
-    video_list = glob.glob(os.path.join(params['video_path'],   for video in tqdm(video_list):
+    video_list = glob.glob(os.path.join(params['video_path'], '*.mp4'))  # 返回所有的.mp4文件名
+    for video in tqdm(video_list):
         video_id = video.split("/")[-1].split(".")[0]
         dst = params['model'] + '_' + video_id
         extract_frames(video, dst)
@@ -72,9 +73,8 @@ def extract_feats(params, model, load_image_fn):
         outfile = os.path.join(dir_fc, video_id + '.npy')
         np.save(outfile, img_feats)
         # cleanup
-        shutil.rmtree(dst) '*.mp4'))  # 返回所有的.mp4文件名
+        shutil.rmtree(dst)
     print(os.path.join(params['video_path'], '*.mp4'))
-
 
 
 if __name__ == '__main__':

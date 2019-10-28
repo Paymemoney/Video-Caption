@@ -9,7 +9,7 @@ def parse_opt():
         type=str,
         default='data/videodatainfo_2017.json',
         help='path to the json file containing video info')
-    parser.add_argument(self_crit_after
+    parser.add_argument(#self_crit_after TODO:unkown arg
         '--info_json',
         type=str,
         default='data/info.json',
