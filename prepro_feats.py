@@ -21,7 +21,7 @@ def extract_frames(video, dst):  # 切视频
             print(" cleanup: " + dst + "/")
             shutil.rmtree(dst)
         os.makedirs(dst)
-        '''
+
         video_to_frames_command = ["ffmpeg",
                                    # (optional) overwrite output file if it exists
                                    '-y',
@@ -29,14 +29,8 @@ def extract_frames(video, dst):  # 切视频
                                    '-vf', "scale=400:300",  # input file
                                    '-qscale:v', "2",  # quality for JPEG
                                    '{0}/%06d.jpg'.format(dst)]
-        '''
-        video_to_frames_command = ["ffmpeg",
-                                   # (optional) overwrite output file if it exists
-                                   '-i', video,  # input file
-                                   '-vf', "scale=400:300",  # input file
-                                   '-qscale:v', "2",  # quality for JPEG
-                                   '{0}/%06d.jpg'.format(dst)]
-        print('true')
+
+
         subprocess.call(video_to_frames_command,
                         stdout=ffmpeg_log, stderr=ffmpeg_log)
 
@@ -54,9 +48,9 @@ def extract_feats(params, model, load_image_fn):
         video_id = video.split("/")[-1].split(".")[0]
         dst = params['model'] + '_' + video_id
         extract_frames(video, dst)
-        print('ok')
-        print(glob.glob(os.path.join(dst, '*.jpg')))
-        print(os.path.join(dst, '*.jpg'))
+        #print('ok')
+        #print(glob.glob(os.path.join(dst, '*.jpg')))
+        #print(os.path.join(dst, '*.jpg'))
 
         image_list = sorted(glob.glob(os.path.join(dst, '*.jpg')))
         samples = np.round(np.linspace(

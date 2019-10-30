@@ -10,11 +10,11 @@ import sys, os
 def showmfcc(wavpath,i):
     t, spe = librosa.load(wavpath)
     mfccs = librosa.feature.mfcc(t, sr=spe)
-    name = "E:/video-caption2/video-caption/data/voice_mfcc/video"+str(i)+".npy"
+    name = "E:/video-caption2/video-caption/data/voice_test_mfcc/video"+str(i)+".npy"
     numpy.save(name, mfccs)
 
 
-def decode2wav(srcname, outname):
+def decode2wav(filename, outname):
     f = audioread.audio_open(filename)
     nsample = 0
     for buf in f:
@@ -48,18 +48,39 @@ def Normalize(data):
     m = numpy.mean(data)
     mx = numpy.max(data)
     mn = numpy.min(data)
-    return [(float(i) - m) / (mx - mn) for i in data]
+    return [[(float(data[i][j]) - m) / (mx - mn) for i in range(data.shape[0])]for j in range(data.shape[1])]
+
+def reps(data):
+    length = numpy.size(data)
+    #print(length)
+    if length%2048!=0:
+        a = numpy.zeros((1,2048-length % 2048))
+        #print(numpy.shape(data), numpy.shape(a))
+        data = numpy.concatenate((data,a),axis=1)
+    return data
 
 if __name__ == '__main__':
-    for i in range(0,10000):
+    for i in range(12000,13000):
         if i%100 ==0:
             print(i)
-        filename = "E:/video-caption2/video-caption/data/voice_normalize/voice"+str(i)+".npy"
-        c3d_feats = "E:/video-caption2/video-caption/data/feats/c3d_feats/video"+str(i)+".npy"
+        '''
+        #mfcc提取
+        file_path = ".\data\\voice_test\\video{0}.wav".format(i)
+        showmfcc(file_path,i)
+        '''
+        filename = "./data/voice_test_mfcc/video"+str(i)+".npy"
+        c3d_feats = "./data/feats/c3d_feats_first/video"+str(i)+".npy"
         if os.path.exists(filename):
             voice = numpy.load(filename)
+            voice = Normalize(voice)
+            voice = numpy.array(voice)
             video = numpy.load(c3d_feats)
+            #print(numpy.shape(voice),numpy.shape(video))
+            voice = voice.reshape(1, -1)
+            voice = reps(voice)
+            voice = voice.reshape(-1, 2048)
             #print(numpy.shape(voice),numpy.shape(video))
             voice = numpy.concatenate((voice,video))
             #print(numpy.shape(voice))
-            numpy.save("E:/video-caption2/video-caption/data/feats/c3d_feats_voice/video"+str(i)+".npy",voice)
+            numpy.save("E:/video-caption2/video-caption/data/feats/c3d_feats/video"+str(i)+".npy",voice)
+        
