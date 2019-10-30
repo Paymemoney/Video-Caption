@@ -57,10 +57,11 @@ class VideoDataset(Dataset):
         #print("1:",fc_feat.shape)
         if self.with_c3d == 1:
             c3d_feat = np.load(os.path.join(self.c3d_feats_dir, 'video%i.npy'%(ix)))
+            c3d_feat = c3d_feat.reshape((80,256))
             #print("2:", c3d_feat.shape)
-            c3d_feat = np.mean(c3d_feat, axis=0, keepdims=True)
+            #c3d_feat = np.mean(c3d_feat, axis=0, keepdims=True)
             #print("3:", c3d_feat.shape)
-            fc_feat = np.concatenate((fc_feat, np.tile(c3d_feat, (fc_feat.shape[0], 1))), axis=0)
+            fc_feat = np.concatenate((fc_feat, c3d_feat), axis=1)
             #print("4:", fc_feat.shape)
         label = np.zeros(self.max_len)
         mask = np.zeros(self.max_len)

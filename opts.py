@@ -24,12 +24,12 @@ def parse_opt():
         '--feats_dir',
         nargs='*',
         type=str,
-        default=['data/feats/resnet152/resnet101'],
+        default=['data/feats/resnet152_first/resnet101'],
         help='path to the directory containing the preprocessed fc feats')
 
-    parser.add_argument('--c3d_feats_dir', type=str, default='data/train-video')
+    parser.add_argument('--c3d_feats_dir', type=str, default='data/feats/c3d_new')
     parser.add_argument(
-        '--with_c3d', type=int, default=0, help='whether to use c3d features')
+        '--with_c3d', type=int, default=1, help='whether to use c3d features')
 
     parser.add_argument(
         '--cached_tokens',
@@ -83,13 +83,13 @@ def parse_opt():
     parser.add_argument(
         '--dim_vid',
         type=int,
-        default=2048,
+        default=2304,
         help='dim of features of video frames')
 
     # Optimization: General
 
     parser.add_argument(
-        '--epochs', type=int, default=3001, help='number of epochs')
+        '--epochs', type=int, default=1001, help='number of epochs')
     parser.add_argument(
         '--batch_size', type=int, default=8, help='minibatch size')
     parser.add_argument(

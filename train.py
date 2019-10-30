@@ -39,7 +39,7 @@ def train(loader, model, crit, optimizer, lr_scheduler, opt, rl_crit=None):
             fc_feats = data['fc_feats'].cuda()
             labels = data['labels'].cuda()
             masks = data['masks'].cuda()
-            print(sc_flag)
+            #print(sc_flag)
             optimizer.zero_grad()
             if not sc_flag:
                 seq_probs, _ = model(fc_feats, labels, 'train')
