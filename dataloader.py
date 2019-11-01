@@ -36,6 +36,8 @@ class VideoDataset(Dataset):
         self.feats_dir = opt["feats_dir"]
         self.c3d_feats_dir = opt['c3d_feats_dir']
         self.with_c3d = opt['with_c3d']
+        self.voice_dir = opt['voice_dir']
+        self.with_voice = opt['with_voice']
         print('load feats from %s' % (self.feats_dir))
         # load in the sequence data
         self.max_len = opt["max_len"]
@@ -58,11 +60,15 @@ class VideoDataset(Dataset):
         if self.with_c3d == 1:
             c3d_feat = np.load(os.path.join(self.c3d_feats_dir, 'video%i.npy'%(ix)))
             c3d_feat = c3d_feat.reshape((80,256))
-            #print("2:", c3d_feat.shape)
-            #c3d_feat = np.mean(c3d_feat, axis=0, keepdims=True)
-            #print("3:", c3d_feat.shape)
             fc_feat = np.concatenate((fc_feat, c3d_feat), axis=1)
-            #print("4:", fc_feat.shape)
+        if self.with_voice == 1:
+            try:
+                voice_feat = np.load(os.path.join(self.voice_dir, 'video%i.npy'%(ix)))
+            except:
+                voice_feat = np.zeros((80, 128))
+                #voice_feat = voice_feat.reshape((80,128))
+            fc_feat = np.concatenate((fc_feat, voice_feat), axis=1)
+
         label = np.zeros(self.max_len)
         mask = np.zeros(self.max_len)
         captions = self.captions['video%i'%(ix)]['final_captions']

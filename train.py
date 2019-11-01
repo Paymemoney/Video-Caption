@@ -52,7 +52,7 @@ def train(loader, model, crit, optimizer, lr_scheduler, opt, rl_crit=None):
                 print(reward.shape)
                 loss = rl_crit(seq_probs, seq_preds,
                                torch.from_numpy(reward).float().cuda())
-            print("yes")
+            #print("yes")
             loss.backward()
             clip_grad_value_(model.parameters(), opt['grad_clip'])
             optimizer.step()

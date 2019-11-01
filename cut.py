@@ -15,8 +15,8 @@ def cut(data):
 
 
 
-srcname1 = "data\\feats\\c3d_feats_first\\video"
-destname1 = "data\\feats\\c3d_new\\video"
+srcname1 = "../c3d_feats_first/video"
+destname1 = "../c3d_new/video"
 
 for i in range(0,13000):
     if i%100==0:

@@ -9,7 +9,7 @@ def parse_opt():
         type=str,
         default='data/videodatainfo_2017.json',
         help='path to the json file containing video info')
-    parser.add_argument(#self_crit_after TODO:unkown arg
+    parser.add_argument( # self_crit_after #TODO:unkown arg
         '--info_json',
         type=str,
         default='data/info.json',
@@ -24,13 +24,15 @@ def parse_opt():
         '--feats_dir',
         nargs='*',
         type=str,
-        default=['data/feats/resnet152_first/resnet101'],
+        default=['data/feats/resnet152/resnet101'],
         help='path to the directory containing the preprocessed fc feats')
 
     parser.add_argument('--c3d_feats_dir', type=str, default='data/feats/c3d_new')
     parser.add_argument(
         '--with_c3d', type=int, default=1, help='whether to use c3d features')
-
+    parser.add_argument('--voice_dir', type=str, default='data/voice_final')
+    parser.add_argument(
+        '--with_voice', type=int, default=1, help='whether to use voice features')
     parser.add_argument(
         '--cached_tokens',
         type=str,
@@ -83,7 +85,7 @@ def parse_opt():
     parser.add_argument(
         '--dim_vid',
         type=int,
-        default=2304,
+        default=2432,
         help='dim of features of video frames')
 
     # Optimization: General
@@ -91,7 +93,7 @@ def parse_opt():
     parser.add_argument(
         '--epochs', type=int, default=1001, help='number of epochs')
     parser.add_argument(
-        '--batch_size', type=int, default=8, help='minibatch size')
+        '--batch_size', type=int, default=128, help='minibatch size')
     parser.add_argument(
         '--grad_clip',
         type=float,
